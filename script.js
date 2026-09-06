@@ -6,7 +6,7 @@
    0. CONFIG — paste your Google Apps Script Web App URL here.
       See apps-script.gs + README.md for setup instructions.
    ------------------------------------------------------------ */
-const ORDER_ENDPOINT = "https://script.google.com/macros/s/XXXXXXXX/exec"; // e.g. "https://script.google.com/macros/s/AKfycbxxxx/exec"
+const ORDER_ENDPOINT = "https://script.google.com/macros/s/AKfycbygiR-N4C2I3LxNu45AP4lTr-p7GRdSrwRnZX2t8Y18ec0xkGEuqVjy-KSlmFTjd-7QGg/exec"; // e.g. "https://script.google.com/macros/s/AKfycbxxxx/exec"
 
 /* ------------------------------------------------------------
    1. Product data — replace image/name/price with real products.
