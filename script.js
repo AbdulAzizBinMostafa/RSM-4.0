@@ -9,9 +9,10 @@
 const ORDER_ENDPOINT = "https://script.google.com/macros/s/AKfycby1bk223oQ9_WC5_8yopv-awRMp6EGG_Uw4Ga_aS3O6XbXUAmCC4Nfk_udLojx27XxiPQ/exec"; // e.g. "https://script.google.com/macros/s/AKfycbxxxx/exec"
 
 /* ------------------------------------------------------------
-   1. Product data — replace image/name/price with real products.
-      Add an "img" field (e.g. "images/basalt-tee.jpg") once you have
-      a real photo for an item — it will render in place of the icon.
+   1. Product data — add an "img" field (e.g. "images/ladies1.jpeg")
+      once you have a real photo — it renders in place of the icon.
+      "price" is OPTIONAL — leave it out and the card shows
+      "Price on request" instead of a number.
    ------------------------------------------------------------ */
 const PRODUCTS = [
   { id: "m01", name: "Basalt Crewneck Tee",     category: "men",   price: 850,  type: "tee" },
@@ -23,14 +24,34 @@ const PRODUCTS = [
   { id: "w02", name: "Marble Knit Top",         category: "women", price: 1100, type: "tee" },
   { id: "w03", name: "Chalk Wide-Leg Pant",     category: "women", price: 1850, type: "pants" },
   { id: "w04", name: "Verdigris Denim Jacket",  category: "women", price: 2600, type: "jacket" },
+  { id: "w05", name: "Ladies Design 1",         category: "women", type: "dress", img: "images/ladies1.jpeg" },
+  { id: "w06", name: "Ladies Design 2",         category: "women", type: "dress", img: "images/ladies2.jpeg" },
+  { id: "w07", name: "Ladies Design 3",         category: "women", type: "dress", img: "images/ladies3.jpeg" },
+  { id: "w08", name: "Ladies Design 4",         category: "women", type: "dress", img: "images/ladies4.jpeg" },
 
   { id: "k01", name: "Pebble Graphic Tee",      category: "kids",  price: 550,  type: "tee" },
   { id: "k02", name: "Little Boulder Hoodie",   category: "kids",  price: 950,  type: "hoodie" },
   { id: "k03", name: "Mini Mason Joggers",      category: "kids",  price: 800,  type: "pants" },
 
-  { id: "d01", name: "Signature Quarry Set",       category: "designs", price: 3200, type: "jacket" },
-  { id: "d02", name: "Limited Stone Capsule Tee",  category: "designs", price: 1200, type: "tee" },
-  { id: "d03", name: "Custom Fit Statement Piece", category: "designs", price: 2800, type: "dress" },
+  { id: "d01", name: "Black Stone",       category: "designs", type: "tee", img: "images/blackstone.jpeg" },
+  { id: "d02", name: "Blue Stone",        category: "designs", type: "tee", img: "images/bluestone.jpeg" },
+  { id: "d03", name: "Button Stone",      category: "designs", type: "tee", img: "images/buttonstone.jpeg" },
+  { id: "d04", name: "Different Type",    category: "designs", type: "tee", img: "images/difftyp.jpeg" },
+  { id: "d05", name: "Golden Stone",      category: "designs", type: "tee", img: "images/goldenstone.jpeg" },
+  { id: "d06", name: "Gold Pyramid",      category: "designs", type: "tee", img: "images/goldpyramid.jpeg" },
+  { id: "d07", name: "Half Diamond",      category: "designs", type: "tee", img: "images/halfdiamond.jpeg" },
+  { id: "d08", name: "Half Pearl Cream",  category: "designs", type: "tee", img: "images/halfpearlcream.jpeg" },
+  { id: "d09", name: "Half Pearl White",  category: "designs", type: "tee", img: "images/halfpearlwhite.jpeg" },
+  { id: "d10", name: "Multi Mirror",      category: "designs", type: "tee", img: "images/multimirror.jpeg" },
+  { id: "d11", name: "Multi Shape Gold",  category: "designs", type: "tee", img: "images/multishapegold.jpeg" },
+  { id: "d12", name: "Plain Design 1",    category: "designs", type: "tee", img: "images/plaindesign1.jpeg" },
+  { id: "d13", name: "Plain Design 2",    category: "designs", type: "tee", img: "images/plaindesign2.jpeg" },
+  { id: "d14", name: "Rainbow Stone",     category: "designs", type: "tee", img: "images/rainbowstone.jpeg" },
+  { id: "d15", name: "Rainbow White",     category: "designs", type: "tee", img: "images/rainbowwhite.jpeg" },
+  { id: "d16", name: "Red Stone",         category: "designs", type: "tee", img: "images/redstone.jpeg" },
+  { id: "d17", name: "Round Stone",       category: "designs", type: "tee", img: "images/roundstone.jpeg" },
+  { id: "d18", name: "Sample Design",     category: "designs", type: "tee", img: "images/sample.jpeg" },
+  { id: "d19", name: "Silver Pyramid",    category: "designs", type: "tee", img: "images/silverpyramid.jpeg" },
 ];
 
 /* How many photo slots each category page shows — used products fill
@@ -48,6 +69,8 @@ const ICONS = {
 };
 
 const currency = (n) => `৳${Number(n || 0).toLocaleString("en-BD")}`;
+/* Price is optional — this is what every price-related display goes through. */
+const priceLabel = (p) => (p.price != null ? currency(p.price) : "Price on request");
 
 /* ------------------------------------------------------------
    2. Product grid rendering — one fixed category per page
@@ -72,7 +95,7 @@ function productCardHTML(p) {
       </div>
       <div class="product-card__body">
         <h3 class="product-card__name">${p.name}</h3>
-        <span class="product-card__price">${currency(p.price)}</span>
+        <span class="product-card__price">${priceLabel(p)}</span>
         <div class="product-card__actions">
           <button class="btn btn--outline" data-action="order" data-id="${p.id}">Order now</button>
           <button class="btn btn--ghost" data-action="add" data-id="${p.id}">Add to cart</button>
@@ -259,11 +282,12 @@ function removeFromCart(id) {
   renderCart();
 }
 
-/* Total price = SUM(unit price × quantity) for every line. */
+/* Total price = SUM(unit price × quantity) for every line. Items with
+   no price yet ("Price on request") contribute 0 to the total. */
 function cartTotal() {
   return cart.reduce((sum, item) => {
     const p = PRODUCTS.find(p => p.id === item.id);
-    return sum + (p ? p.price * item.qty : 0);
+    return sum + (p && p.price != null ? p.price * item.qty : 0);
   }, 0);
 }
 
@@ -278,14 +302,14 @@ function renderCart() {
     cartItemsEl.innerHTML = cart.map(item => {
       const p = PRODUCTS.find(p => p.id === item.id);
       if (!p) return "";
-      const lineTotal = p.price * item.qty;
+      const lineTotal = p.price != null ? currency(p.price * item.qty) : "Price on request";
       return `
         <div class="cart-item" data-id="${p.id}">
-          <div class="cart-item__media">${ICONS[p.type] || ICONS.tee}</div>
+          <div class="cart-item__media">${p.img ? `<img src="${p.img}" alt="${p.name}">` : (ICONS[p.type] || ICONS.tee)}</div>
           <div class="cart-item__info">
             <span class="cart-item__name">${p.name}</span>
             <div class="cart-item__meta">
-              <span class="cart-item__unit">${currency(p.price)} each</span>
+              <span class="cart-item__unit">${priceLabel(p)}${p.price != null ? " each" : ""}</span>
               <div class="cart-item__qty">
                 <button data-action="dec" data-id="${p.id}">&minus;</button>
                 <span>${item.qty}</span>
@@ -294,7 +318,7 @@ function renderCart() {
             </div>
             <div class="cart-item__meta">
               <button class="cart-item__remove" data-action="remove" data-id="${p.id}">Remove</button>
-              <span class="cart-item__linetotal">${currency(lineTotal)}</span>
+              <span class="cart-item__linetotal">${lineTotal}</span>
             </div>
           </div>
         </div>`;
@@ -330,7 +354,7 @@ if (cartItemsEl) {
 }
 
 /* ------------------------------------------------------------
-   5. Order modal + submission (total = unit price × qty)
+   5. Order modal + submission
    ------------------------------------------------------------ */
 const orderModal = document.getElementById("orderModal");
 const orderClose = document.getElementById("orderClose");
@@ -354,6 +378,11 @@ function refreshLiveTotal() {
   if (!orderLiveTotal || !orderContext) return;
   if (orderContext.single) {
     const p = PRODUCTS.find(p => p.id === orderContext.single);
+    if (p.price == null) {
+      orderTotalPriceField.value = "Price on request";
+      orderLiveTotal.textContent = "Total: Price on request";
+      return;
+    }
     const qty = Math.max(1, parseInt(orderQtyInput.value, 10) || 1);
     const total = p.price * qty;
     orderTotalPriceField.value = total;
@@ -373,9 +402,9 @@ function openOrderModal(context) {
   if (context.single) {
     const p = PRODUCTS.find(p => p.id === context.single);
     orderModalTitle.textContent = "Order this piece";
-    orderSummary.textContent = `${p.name} — ${currency(p.price)} each`;
+    orderSummary.textContent = `${p.name} — ${priceLabel(p)}${p.price != null ? " each" : ""}`;
     orderProductField.value = p.name;
-    orderUnitPriceField.value = p.price;
+    orderUnitPriceField.value = p.price != null ? p.price : "Price on request";
     orderQtyLabel.style.display = "flex";
   } else {
     if (!cart.length) return;
