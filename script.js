@@ -57,8 +57,8 @@ const PRODUCTS = [
 /* How many photo slots each category page shows — used products fill
    the first slots, the rest render as empty "add a photo" placeholders
    so it's obvious how much room is left. */
-const CATEGORY_CAPACITY = { men: 10, women: 10, kids: 10, designs: 20 };
-const MATERIALS_CAPACITY = 20;
+const CATEGORY_CAPACITY = { men: 30, women: 30, kids: 30, designs: 30 };
+const MATERIALS_CAPACITY = 30;
 
 const ICONS = {
   tee: `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M22 8 L10 16 L14 26 L20 22 L20 56 L44 56 L44 22 L50 26 L54 16 L42 8 C42 12 38 15 32 15 C26 15 22 12 22 8 Z"/></svg>`,
