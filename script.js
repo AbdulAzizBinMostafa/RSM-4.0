@@ -24,12 +24,12 @@ const PRODUCTS = [
   { id: "w02", name: "Marble Knit Top",         category: "women", price: 1100, type: "tee" },
   { id: "w03", name: "Chalk Wide-Leg Pant",     category: "women", price: 1850, type: "pants" },
   { id: "w04", name: "Verdigris Denim Jacket",  category: "women", price: 2600, type: "jacket" },
-  
   { id: "w05", name: "Ladies Design 1",         category: "women", type: "dress", img: "images/ladies1.jpeg" },
   { id: "w06", name: "Ladies Design 2",         category: "women", type: "dress", img: "images/ladies2.jpeg" },
   { id: "w07", name: "Ladies Design 3",         category: "women", type: "dress", img: "images/ladies3.jpeg" },
   { id: "w08", name: "Ladies Design 4",         category: "women", type: "dress", img: "images/ladies4.jpeg" },
-  { id: "w09", name: "Ladies Design 5",         category: "women", type: "dress", img: "images/ladies-01.jpeg" },
+  { id: "w09", name: "Ladies Design 5",         category: "women", type: "dress", img: "images/ladies-1.jpeg" },
+  { id: "w10", name: "Ladies Design 6",         category: "women", type: "dress", img: "images/ladies-2.jpeg" },
 
   { id: "k01", name: "Pebble Graphic Tee",      category: "kids",  price: 550,  type: "tee" },
   { id: "k02", name: "Little Boulder Hoodie",   category: "kids",  price: 950,  type: "hoodie" },
