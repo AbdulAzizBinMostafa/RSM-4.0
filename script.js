@@ -166,14 +166,19 @@ if (productGrid) {
 }
 
 /* ------------------------------------------------------------
-   2b. Raw Materials gallery — its own 20-slot grid (no price/cart,
+   2b. Raw Materials gallery — its own 30-slot grid (no price/cart,
        just a photo + name + short note per material).
    ------------------------------------------------------------ */
 const MATERIALS = [
-  { id: "mat01", name: "Heavyweight Cotton",          note: "240–320 GSM combed cotton for tees, hoodies and sweats." },
-  { id: "mat02", name: "Selvedge & Twill Denim",      note: "Mid-to-heavyweight denim and twill for outerwear and trousers." },
-  { id: "mat03", name: "Recycled & Deadstock Fabric", note: "Recycled fibre blends and deadstock rolls to cut waste." },
-  { id: "mat04", name: "Natural Dyes & Finishes",     note: "Stone-washed, mineral-dyed finishes for a tonal palette." },
+  { id: "mat01", name: "Bow Shaped",          img: "images/Design-1.jpeg" },
+  { id: "mat02", name: "Love Shaped",      img: "images/Design-2.jpeg" },
+  { id: "mat03", name: "Butterfly Shaped", img: "images/Design-3.jpeg" },
+  { id: "mat04", name: "5 Love Shaped",     img: "images/Design-4.jpeg" },
+  { id: "mat05", name: "Dog Shaped",     img: "images/Design-5.jpeg" },
+  { id: "mat06", name: "Calligraphy Shaped",     img: "images/Design-6.jpeg" },
+  { id: "mat07", name: "Frog Shaped",     img: "images/Design-7.jpeg" },
+  { id: "mat08", name: "Bow & Love",     img: "images/Design-8.jpeg" },
+  { id: "mat09", name: "Tree Shaped",     img: "images/Design-9.jpeg" },
 ];
 
 const materialsGrid = document.getElementById("materialsGrid");
