@@ -179,6 +179,7 @@ const MATERIALS = [
   { id: "mat07", name: "Frog Shaped",     img: "images/Design-7.jpeg" },
   { id: "mat08", name: "Bow & Love",     img: "images/Design-8.jpeg" },
   { id: "mat09", name: "Tree Shaped",     img: "images/Design-9.jpeg" },
+  
 ];
 
 const materialsGrid = document.getElementById("materialsGrid");
